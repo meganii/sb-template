@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Creating Scrapbox Page Template</title>
+</head>
+
+<body>
+  <script type="module">
+    try {
+      const urlSearchParams = new URLSearchParams(location.search);
+      const projectName = urlSearchParams.get("projectName");
+
+      const body = `body test`;
+
+      location.href = `https://scrapbox.io/${encodeURIComponent(
+        projectName
+      )}/${encodeURIComponent(pageTitle)}?${new URLSearchParams([
+        ["body", body],
+      ]).toString()}`;
+    } catch (exception) {
+      alert(exception);
+    }
+  </script>
+</body>
+</html>
