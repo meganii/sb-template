@@ -12,9 +12,43 @@
       const urlSearchParams = new URLSearchParams(location.search);
       const projectName = urlSearchParams.get("projectName");
 
-      const pageTitle = 'test';
-      const body = `body test`;
+      const pageTitle = '今週のごはん';
+      const body = `
+[**** [月曜日.icon]]
+朝　
+昼　
+夜　
 
+[**** [火曜日.icon]]
+朝　
+昼　
+夜　
+
+[**** [水曜日.icon]]
+朝　
+昼　
+夜　
+
+[**** [木曜日.icon]]
+朝　
+昼　
+夜　
+
+[**** [金曜日.icon]]
+朝　
+昼　
+夜　
+
+[**** [土曜日.icon]]
+朝　
+昼　
+夜　
+
+[**** [日曜日.icon]]
+朝　
+昼　
+夜　
+`;
       location.href = `https://scrapbox.io/${encodeURIComponent(
         projectName
       )}/${encodeURIComponent(pageTitle)}?${new URLSearchParams([
