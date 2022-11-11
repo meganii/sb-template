@@ -5,7 +5,7 @@ const today = new Date()
 const year = getYear(today)
 const week = getISOWeek(today)
 const startDay =  startOfISOWeek(today)
-const pageTitle = `🍚献立 ${year}-${week}W`
+const pageTitle = `今週のごはん ${year}-${week}W`
 
 let body = ''
 

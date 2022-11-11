@@ -2046,7 +2046,7 @@
   var year = getYear(today);
   var week = getISOWeek(today);
   var startDay = startOfISOWeek(today);
-  var pageTitle = `\u{1F35A}\u732E\u7ACB ${year}-${week}W`;
+  var pageTitle = `\u4ECA\u9031\u306E\u3054\u306F\u3093 ${year}-${week}W`;
   var body = "";
   for (let i2 = 0; i2 < 7; i2++) {
     const d3 = format(addDays(startDay, i2), "yyyy-MM-dd(E)", { locale: ja_default });
