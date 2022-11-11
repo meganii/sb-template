@@ -2046,7 +2046,6 @@
   var year = getYear(today);
   var week = getISOWeek(today);
   var startDay = startOfISOWeek(today);
-  var projectName = "meganii-private";
   var pageTitle = `\u{1F35A}\u732E\u7ACB ${year}-${week}W`;
   var body = "";
   for (let i2 = 0; i2 < 7; i2++) {
@@ -2060,7 +2059,13 @@
     body = body + content;
   }
   try {
-    window.location.href = `https://scrapbox.io/${encodeURIComponent(projectName)}/${encodeURIComponent(pageTitle)}?${new URLSearchParams([["body", body]]).toString()}`;
+    const urlSearchParams = new URLSearchParams(location.search);
+    const projectName = urlSearchParams.get("projectName");
+    if (projectName) {
+      location.href = `https://scrapbox.io/${encodeURIComponent(projectName)}/${encodeURIComponent(pageTitle)}?${new URLSearchParams([["body", body]]).toString()}`;
+    } else {
+      alert("projectName\u306E\u6307\u5B9A\u304C\u3042\u308A\u307E\u305B\u3093");
+    }
   } catch (exception) {
     alert(exception);
   }
