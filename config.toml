@@ -1,0 +1,4 @@
+baseURL = 'https://meganii.github.io/sb-template/'
+languageCode = 'ja-JP'
+title = 'Template for creating Scrapbox page'
+theme = 'sb-template'
