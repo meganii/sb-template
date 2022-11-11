@@ -5,7 +5,6 @@ const today = new Date()
 const year = getYear(today)
 const week = getISOWeek(today)
 const startDay =  startOfISOWeek(today)
-const projectName = 'meganii-private'
 const pageTitle = `🍚献立 ${year}-${week}W`
 
 let body = ''
@@ -26,7 +25,13 @@ for (let i=0; i<7; i++) {
 // console.log(week, day, format(startDay, 'yyyy-MM-dd', {locale: ja}))
 
 try {
-  window.location.href = `https://scrapbox.io/${encodeURIComponent(projectName)}/${encodeURIComponent(pageTitle)}?${new URLSearchParams([["body", body],]).toString()}`
+  const urlSearchParams = new URLSearchParams(location.search)
+  const projectName = urlSearchParams.get("projectName")
+  if (projectName) {
+    location.href = `https://scrapbox.io/${encodeURIComponent(projectName)}/${encodeURIComponent(pageTitle)}?${new URLSearchParams([["body", body],]).toString()}`
+  } else {
+    alert("projectNameの指定がありません")
+  }
 } catch (exception) {
-  alert(exception)
+  alert(exception);
 }
