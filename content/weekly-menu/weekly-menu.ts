@@ -1,17 +1,31 @@
 import { getYear, getISOWeek, getISODay, startOfISOWeek, addDays, format } from 'date-fns'
 import ja from 'date-fns/locale/ja'
 
-const today = new Date()
-const year = getYear(today)
-const week = getISOWeek(today)
-const startDay =  startOfISOWeek(today)
-const pageTitle = `今週のごはん ${year}-${week}W`
+const getTargetDay = (targetWeek) => {
+  const today = new Date()
+  if (targetWeek == 'nextWeek') {
+    return addDays(today, 7)
+  } else {
+    return today
+  }
+}
 
-let body = ''
+try {
+  const urlSearchParams = new URLSearchParams(location.search)
+  const projectName = urlSearchParams.get("projectName")
+  const targetWeek = urlSearchParams.get("target")
 
-for (let i=0; i<7; i++) {
-  const d = format(addDays(startDay, i), 'yyyy-MM-dd(E)', {locale: ja})
-  const content = 
+  const targetDay = getTargetDay(targetWeek)
+  const year = getYear(targetDay)
+  const week = getISOWeek(targetDay)
+  const startDay =  startOfISOWeek(targetDay)
+  const pageTitle = `今週のごはん ${year}-${week}W`
+
+  let body = ''
+
+  for (let i=0; i<7; i++) {
+    const d = format(addDays(startDay, i), 'yyyy-MM-dd(E)', {locale: ja})
+    const content = 
 `${d}
 朝：
 昼：
@@ -21,12 +35,9 @@ for (let i=0; i<7; i++) {
   body = body + content
 }
 
-// console.log(body)
-// console.log(week, day, format(startDay, 'yyyy-MM-dd', {locale: ja}))
+  // console.log(body)
+  // console.log(week, day, format(startDay, 'yyyy-MM-dd', {locale: ja}))
 
-try {
-  const urlSearchParams = new URLSearchParams(location.search)
-  const projectName = urlSearchParams.get("projectName")
   if (projectName) {
     location.href = `https://scrapbox.io/${encodeURIComponent(projectName)}/${encodeURIComponent(pageTitle)}?${new URLSearchParams([["body", body],]).toString()}`
   } else {
