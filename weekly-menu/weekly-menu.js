@@ -106,30 +106,30 @@
   function getISOWeekYear(dirtyDate) {
     requiredArgs(1, arguments);
     var date = toDate(dirtyDate);
-    var year2 = date.getFullYear();
+    var year = date.getFullYear();
     var fourthOfJanuaryOfNextYear = new Date(0);
-    fourthOfJanuaryOfNextYear.setFullYear(year2 + 1, 0, 4);
+    fourthOfJanuaryOfNextYear.setFullYear(year + 1, 0, 4);
     fourthOfJanuaryOfNextYear.setHours(0, 0, 0, 0);
     var startOfNextYear = startOfISOWeek(fourthOfJanuaryOfNextYear);
     var fourthOfJanuaryOfThisYear = new Date(0);
-    fourthOfJanuaryOfThisYear.setFullYear(year2, 0, 4);
+    fourthOfJanuaryOfThisYear.setFullYear(year, 0, 4);
     fourthOfJanuaryOfThisYear.setHours(0, 0, 0, 0);
     var startOfThisYear = startOfISOWeek(fourthOfJanuaryOfThisYear);
     if (date.getTime() >= startOfNextYear.getTime()) {
-      return year2 + 1;
+      return year + 1;
     } else if (date.getTime() >= startOfThisYear.getTime()) {
-      return year2;
+      return year;
     } else {
-      return year2 - 1;
+      return year - 1;
     }
   }
 
   // node_modules/date-fns/esm/startOfISOWeekYear/index.js
   function startOfISOWeekYear(dirtyDate) {
     requiredArgs(1, arguments);
-    var year2 = getISOWeekYear(dirtyDate);
+    var year = getISOWeekYear(dirtyDate);
     var fourthOfJanuary = new Date(0);
-    fourthOfJanuary.setFullYear(year2, 0, 4);
+    fourthOfJanuary.setFullYear(year, 0, 4);
     fourthOfJanuary.setHours(0, 0, 0, 0);
     var date = startOfISOWeek(fourthOfJanuary);
     return date;
@@ -207,30 +207,30 @@
   function getUTCISOWeekYear(dirtyDate) {
     requiredArgs(1, arguments);
     var date = toDate(dirtyDate);
-    var year2 = date.getUTCFullYear();
+    var year = date.getUTCFullYear();
     var fourthOfJanuaryOfNextYear = new Date(0);
-    fourthOfJanuaryOfNextYear.setUTCFullYear(year2 + 1, 0, 4);
+    fourthOfJanuaryOfNextYear.setUTCFullYear(year + 1, 0, 4);
     fourthOfJanuaryOfNextYear.setUTCHours(0, 0, 0, 0);
     var startOfNextYear = startOfUTCISOWeek(fourthOfJanuaryOfNextYear);
     var fourthOfJanuaryOfThisYear = new Date(0);
-    fourthOfJanuaryOfThisYear.setUTCFullYear(year2, 0, 4);
+    fourthOfJanuaryOfThisYear.setUTCFullYear(year, 0, 4);
     fourthOfJanuaryOfThisYear.setUTCHours(0, 0, 0, 0);
     var startOfThisYear = startOfUTCISOWeek(fourthOfJanuaryOfThisYear);
     if (date.getTime() >= startOfNextYear.getTime()) {
-      return year2 + 1;
+      return year + 1;
     } else if (date.getTime() >= startOfThisYear.getTime()) {
-      return year2;
+      return year;
     } else {
-      return year2 - 1;
+      return year - 1;
     }
   }
 
   // node_modules/date-fns/esm/_lib/startOfUTCISOWeekYear/index.js
   function startOfUTCISOWeekYear(dirtyDate) {
     requiredArgs(1, arguments);
-    var year2 = getUTCISOWeekYear(dirtyDate);
+    var year = getUTCISOWeekYear(dirtyDate);
     var fourthOfJanuary = new Date(0);
-    fourthOfJanuary.setUTCFullYear(year2, 0, 4);
+    fourthOfJanuary.setUTCFullYear(year, 0, 4);
     fourthOfJanuary.setUTCHours(0, 0, 0, 0);
     var date = startOfUTCISOWeek(fourthOfJanuary);
     return date;
@@ -267,26 +267,26 @@
     var _ref, _ref2, _ref3, _options$firstWeekCon, _options$locale, _options$locale$optio, _defaultOptions$local, _defaultOptions$local2;
     requiredArgs(1, arguments);
     var date = toDate(dirtyDate);
-    var year2 = date.getUTCFullYear();
+    var year = date.getUTCFullYear();
     var defaultOptions2 = getDefaultOptions();
     var firstWeekContainsDate = toInteger((_ref = (_ref2 = (_ref3 = (_options$firstWeekCon = options === null || options === void 0 ? void 0 : options.firstWeekContainsDate) !== null && _options$firstWeekCon !== void 0 ? _options$firstWeekCon : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.firstWeekContainsDate) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions2.firstWeekContainsDate) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions2.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.firstWeekContainsDate) !== null && _ref !== void 0 ? _ref : 1);
     if (!(firstWeekContainsDate >= 1 && firstWeekContainsDate <= 7)) {
       throw new RangeError("firstWeekContainsDate must be between 1 and 7 inclusively");
     }
     var firstWeekOfNextYear = new Date(0);
-    firstWeekOfNextYear.setUTCFullYear(year2 + 1, 0, firstWeekContainsDate);
+    firstWeekOfNextYear.setUTCFullYear(year + 1, 0, firstWeekContainsDate);
     firstWeekOfNextYear.setUTCHours(0, 0, 0, 0);
     var startOfNextYear = startOfUTCWeek(firstWeekOfNextYear, options);
     var firstWeekOfThisYear = new Date(0);
-    firstWeekOfThisYear.setUTCFullYear(year2, 0, firstWeekContainsDate);
+    firstWeekOfThisYear.setUTCFullYear(year, 0, firstWeekContainsDate);
     firstWeekOfThisYear.setUTCHours(0, 0, 0, 0);
     var startOfThisYear = startOfUTCWeek(firstWeekOfThisYear, options);
     if (date.getTime() >= startOfNextYear.getTime()) {
-      return year2 + 1;
+      return year + 1;
     } else if (date.getTime() >= startOfThisYear.getTime()) {
-      return year2;
+      return year;
     } else {
-      return year2 - 1;
+      return year - 1;
     }
   }
 
@@ -296,9 +296,9 @@
     requiredArgs(1, arguments);
     var defaultOptions2 = getDefaultOptions();
     var firstWeekContainsDate = toInteger((_ref = (_ref2 = (_ref3 = (_options$firstWeekCon = options === null || options === void 0 ? void 0 : options.firstWeekContainsDate) !== null && _options$firstWeekCon !== void 0 ? _options$firstWeekCon : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.firstWeekContainsDate) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions2.firstWeekContainsDate) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions2.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.firstWeekContainsDate) !== null && _ref !== void 0 ? _ref : 1);
-    var year2 = getUTCWeekYear(dirtyDate, options);
+    var year = getUTCWeekYear(dirtyDate, options);
     var firstWeek = new Date(0);
-    firstWeek.setUTCFullYear(year2, 0, firstWeekContainsDate);
+    firstWeek.setUTCFullYear(year, 0, firstWeekContainsDate);
     firstWeek.setUTCHours(0, 0, 0, 0);
     var date = startOfUTCWeek(firstWeek, options);
     return date;
@@ -327,8 +327,8 @@
   var formatters = {
     y: function y(date, token) {
       var signedYear = date.getUTCFullYear();
-      var year2 = signedYear > 0 ? signedYear : 1 - signedYear;
-      return addLeadingZeros(token === "yy" ? year2 % 100 : year2, token.length);
+      var year = signedYear > 0 ? signedYear : 1 - signedYear;
+      return addLeadingZeros(token === "yy" ? year % 100 : year, token.length);
     },
     M: function M(date, token) {
       var month = date.getUTCMonth();
@@ -408,8 +408,8 @@
     y: function y2(date, token, localize3) {
       if (token === "yo") {
         var signedYear = date.getUTCFullYear();
-        var year2 = signedYear > 0 ? signedYear : 1 - signedYear;
-        return localize3.ordinalNumber(year2, {
+        var year = signedYear > 0 ? signedYear : 1 - signedYear;
+        return localize3.ordinalNumber(year, {
           unit: "year"
         });
       }
@@ -434,8 +434,8 @@
       return addLeadingZeros(isoWeekYear, token.length);
     },
     u: function u(date, token) {
-      var year2 = date.getUTCFullYear();
-      return addLeadingZeros(year2, token.length);
+      var year = date.getUTCFullYear();
+      return addLeadingZeros(year, token.length);
     },
     Q: function Q(date, token, localize3) {
       var quarter = Math.ceil((date.getUTCMonth() + 1) / 3);
@@ -553,13 +553,13 @@
       }
     },
     w: function w(date, token, localize3, options) {
-      var week2 = getUTCWeek(date, options);
+      var week = getUTCWeek(date, options);
       if (token === "wo") {
-        return localize3.ordinalNumber(week2, {
+        return localize3.ordinalNumber(week, {
           unit: "week"
         });
       }
-      return addLeadingZeros(week2, token.length);
+      return addLeadingZeros(week, token.length);
     },
     I: function I(date, token, localize3) {
       var isoWeek = getUTCISOWeek(date);
@@ -2042,25 +2042,34 @@
   var ja_default = locale2;
 
   // <stdin>
-  var today = new Date();
-  var year = getYear(today);
-  var week = getISOWeek(today);
-  var startDay = startOfISOWeek(today);
-  var pageTitle = `\u4ECA\u9031\u306E\u3054\u306F\u3093 ${year}-${week}W`;
-  var body = "";
-  for (let i2 = 0; i2 < 7; i2++) {
-    const d3 = format(addDays(startDay, i2), "yyyy-MM-dd(E)", { locale: ja_default });
-    const content = `${d3}
+  var getTargetDay = (targetWeek) => {
+    const today = new Date();
+    if (targetWeek == "nextWeek") {
+      return addDays(today, 7);
+    } else {
+      return today;
+    }
+  };
+  try {
+    const urlSearchParams = new URLSearchParams(location.search);
+    const projectName = urlSearchParams.get("projectName");
+    const targetWeek = urlSearchParams.get("target");
+    const targetDay = getTargetDay(targetWeek);
+    const year = getYear(targetDay);
+    const week = getISOWeek(targetDay);
+    const startDay = startOfISOWeek(targetDay);
+    const pageTitle = `\u4ECA\u9031\u306E\u3054\u306F\u3093 ${year}-${week}W`;
+    let body = "";
+    for (let i2 = 0; i2 < 7; i2++) {
+      const d3 = format(addDays(startDay, i2), "yyyy-MM-dd(E)", { locale: ja_default });
+      const content = `${d3}
 \u671D\uFF1A
 \u663C\uFF1A
 \u591C\uFF1A
 
 `;
-    body = body + content;
-  }
-  try {
-    const urlSearchParams = new URLSearchParams(location.search);
-    const projectName = urlSearchParams.get("projectName");
+      body = body + content;
+    }
     if (projectName) {
       location.href = `https://scrapbox.io/${encodeURIComponent(projectName)}/${encodeURIComponent(pageTitle)}?${new URLSearchParams([["body", body]]).toString()}`;
     } else {
