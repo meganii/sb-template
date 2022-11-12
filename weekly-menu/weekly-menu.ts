@@ -1,4 +1,4 @@
-import { getYear, getISOWeek, getISODay, startOfISOWeek, addDays, format } from 'date-fns'
+import { getYear, getISOWeek, startOfISOWeek, addDays, format } from 'date-fns'
 import ja from 'date-fns/locale/ja'
 
 const getTargetDay = (targetWeek) => {
