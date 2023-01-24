@@ -39,7 +39,11 @@ try {
     body = body + content
   }
 
-  const nav = `[${prevPageTitle}] <- ${pageTitle} -> [${nextPageTitle}]`
+  const nav =
+`
+[${prevPageTitle}] <- ${pageTitle} -> [${nextPageTitle}]
+[https://meganii.github.io/sb-template/weekly-menu/?projectName=${projectName}&target=nextWeek 来週のページを作成]
+`
   body = body + nav
 
   // console.log(body)
