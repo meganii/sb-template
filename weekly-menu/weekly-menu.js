@@ -2056,9 +2056,13 @@
     const targetWeek = urlSearchParams.get("target");
     const targetDay = getTargetDay(targetWeek);
     const year = getYear(targetDay);
-    const week = getISOWeek(targetDay);
+    const week = getISOWeek(targetDay).toString().padStart(2, "0");
+    const nextWeek = getISOWeek(addDays(targetDay, 7)).toString().padStart(2, "0");
+    const prevWeek = getISOWeek(addDays(targetDay, -7)).toString().padStart(2, "0");
     const startDay = startOfISOWeek(targetDay);
     const pageTitle = `\u4ECA\u9031\u306E\u3054\u306F\u3093 ${year}-${week}W`;
+    const nextPageTitle = `\u4ECA\u9031\u306E\u3054\u306F\u3093 ${year}-${nextWeek}W`;
+    const prevPageTitle = `\u4ECA\u9031\u306E\u3054\u306F\u3093 ${year}-${prevWeek}W`;
     let body = "";
     for (let i2 = 0; i2 < 7; i2++) {
       const d3 = format(addDays(startDay, i2), "yyyy-MM-dd(E)", { locale: ja_default });
@@ -2070,6 +2074,8 @@
 `;
       body = body + content;
     }
+    const nav = `[${prevPageTitle}] <- ${pageTitle} -> [${nextPageTitle}]`;
+    body = body + nav;
     if (projectName) {
       location.href = `https://scrapbox.io/${encodeURIComponent(projectName)}/${encodeURIComponent(pageTitle)}?${new URLSearchParams([["body", body]]).toString()}`;
     } else {
