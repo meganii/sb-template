@@ -2074,7 +2074,10 @@
 `;
       body = body + content;
     }
-    const nav = `[${prevPageTitle}] <- ${pageTitle} -> [${nextPageTitle}]`;
+    const nav = `
+[${prevPageTitle}] <- ${pageTitle} -> [${nextPageTitle}]
+[https://meganii.github.io/sb-template/weekly-menu/?projectName=${projectName}&target=nextWeek \u6765\u9031\u306E\u30DA\u30FC\u30B8\u3092\u4F5C\u6210]
+`;
     body = body + nav;
     if (projectName) {
       location.href = `https://scrapbox.io/${encodeURIComponent(projectName)}/${encodeURIComponent(pageTitle)}?${new URLSearchParams([["body", body]]).toString()}`;
