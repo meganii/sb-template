@@ -17,23 +17,30 @@ try {
 
   const targetDay = getTargetDay(targetWeek)
   const year = getYear(targetDay)
-  const week = getISOWeek(targetDay)
-  const startDay =  startOfISOWeek(targetDay)
+  const week = getISOWeek(targetDay).toString().padStart(2, "0")
+  const nextWeek = getISOWeek(addDays(targetDay, 7)).toString().padStart(2, "0")
+  const prevWeek = getISOWeek(addDays(targetDay, -7)).toString().padStart(2, "0")
+  const startDay = startOfISOWeek(targetDay)
   const pageTitle = `今週のごはん ${year}-${week}W`
+  const nextPageTitle = `今週のごはん ${year}-${nextWeek}W`
+  const prevPageTitle = `今週のごはん ${year}-${prevWeek}W`
 
   let body = ''
 
-  for (let i=0; i<7; i++) {
-    const d = format(addDays(startDay, i), 'yyyy-MM-dd(E)', {locale: ja})
-    const content = 
-`${d}
+  for (let i = 0; i < 7; i++) {
+    const d = format(addDays(startDay, i), 'yyyy-MM-dd(E)', { locale: ja })
+    const content =
+      `${d}
 朝：
 昼：
 夜：
 
 `
-  body = body + content
-}
+    body = body + content
+  }
+
+  const nav = `[${prevPageTitle}] <- ${pageTitle} -> [${nextPageTitle}]`
+  body = body + nav
 
   // console.log(body)
   // console.log(week, day, format(startDay, 'yyyy-MM-dd', {locale: ja}))
