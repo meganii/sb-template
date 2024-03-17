@@ -142,6 +142,14 @@
     return date.getTime() - utcDate.getTime();
   }
 
+  // node_modules/date-fns/esm/addWeeks/index.js
+  function addWeeks(dirtyDate, dirtyAmount) {
+    requiredArgs(2, arguments);
+    var amount = toInteger(dirtyAmount);
+    var days = amount * 7;
+    return addDays(dirtyDate, days);
+  }
+
   // node_modules/date-fns/esm/isDate/index.js
   function _typeof2(obj) {
     "@babel/helpers - typeof";
@@ -1637,12 +1645,6 @@
     return Math.round(diff / MILLISECONDS_IN_WEEK3) + 1;
   }
 
-  // node_modules/date-fns/esm/getYear/index.js
-  function getYear(dirtyDate) {
-    requiredArgs(1, arguments);
-    return toDate(dirtyDate).getFullYear();
-  }
-
   // node_modules/date-fns/esm/locale/ja/_lib/formatDistance/index.js
   var formatDistanceLocale2 = {
     lessThanXSeconds: {
@@ -2042,30 +2044,23 @@
   var ja_default = locale2;
 
   // <stdin>
-  var getTargetDay = (targetWeek) => {
-    const today = new Date();
-    if (targetWeek == "nextWeek") {
-      return addDays(today, 7);
-    } else {
-      return today;
-    }
-  };
+  var baseURL = "https://meganii.github.io";
   try {
     const urlSearchParams = new URLSearchParams(location.search);
     const projectName = urlSearchParams.get("projectName");
-    const targetWeek = urlSearchParams.get("target");
-    const targetDay = getTargetDay(targetWeek);
-    const year = getYear(targetDay);
-    const week = getISOWeek(targetDay).toString().padStart(2, "0");
-    const nextWeek = getISOWeek(addDays(targetDay, 7)).toString().padStart(2, "0");
-    const prevWeek = getISOWeek(addDays(targetDay, -7)).toString().padStart(2, "0");
-    const startDay = startOfISOWeek(targetDay);
+    const target = urlSearchParams.get("target") || "";
+    const targetWeek = target.split("-");
+    const year = targetWeek[0];
+    const week = targetWeek[1];
+    const startDate = startOfISOWeek(addWeeks(new Date(parseInt(year), 0), parseInt(week) - 1));
+    const nextWeek = getISOWeek(addDays(startDate, 7)).toString().padStart(2, "0");
+    const prevWeek = getISOWeek(addDays(startDate, -7)).toString().padStart(2, "0");
     const pageTitle = `\u4ECA\u9031\u306E\u3054\u306F\u3093 ${year}-${week}W`;
     const nextPageTitle = `\u4ECA\u9031\u306E\u3054\u306F\u3093 ${year}-${nextWeek}W`;
     const prevPageTitle = `\u4ECA\u9031\u306E\u3054\u306F\u3093 ${year}-${prevWeek}W`;
     let body = "";
     for (let i2 = 0; i2 < 7; i2++) {
-      const d3 = format(addDays(startDay, i2), "yyyy-MM-dd(E)", { locale: ja_default });
+      const d3 = format(addDays(startDate, i2), "yyyy-MM-dd(E)", { locale: ja_default });
       const content = `${d3}
 \u671D\uFF1A
 \u663C\uFF1A
@@ -2076,7 +2071,7 @@
     }
     const nav = `
 [${prevPageTitle}] <- ${pageTitle} -> [${nextPageTitle}]
-[https://meganii.github.io/sb-template/weekly-menu/?projectName=${projectName}&target=nextWeek \u6765\u9031\u306E\u30DA\u30FC\u30B8\u3092\u4F5C\u6210]
+[${baseURL}/sb-template/weekly-menu/?projectName=${projectName}&target=${year}-${nextWeek} \u6765\u9031\u306E\u30DA\u30FC\u30B8\u3092\u4F5C\u6210]
 `;
     body = body + nav;
     if (projectName) {
