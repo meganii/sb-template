@@ -48,29 +48,6 @@
     }
   }
 
-  // node_modules/date-fns/esm/addMonths/index.js
-  function addMonths(dirtyDate, dirtyAmount) {
-    requiredArgs(2, arguments);
-    var date = toDate(dirtyDate);
-    var amount = toInteger(dirtyAmount);
-    if (isNaN(amount)) {
-      return new Date(NaN);
-    }
-    if (!amount) {
-      return date;
-    }
-    var dayOfMonth = date.getDate();
-    var endOfDesiredMonth = new Date(date.getTime());
-    endOfDesiredMonth.setMonth(date.getMonth() + amount + 1, 0);
-    var daysInMonth = endOfDesiredMonth.getDate();
-    if (dayOfMonth >= daysInMonth) {
-      return endOfDesiredMonth;
-    } else {
-      date.setFullYear(endOfDesiredMonth.getFullYear(), endOfDesiredMonth.getMonth(), dayOfMonth);
-      return date;
-    }
-  }
-
   // node_modules/date-fns/esm/addMilliseconds/index.js
   function addMilliseconds(dirtyDate, dirtyAmount) {
     requiredArgs(2, arguments);
@@ -2046,19 +2023,11 @@
     }));
     return calendar;
   }
-  function getTargetDay(target) {
-    const today = new Date();
-    if (target == "nextMonth") {
-      return addMonths(today, 1);
-    } else {
-      return today;
-    }
-  }
   try {
     const urlSearchParams = new URLSearchParams(location.search);
     const projectName = urlSearchParams.get("projectName");
     const target = urlSearchParams.get("target") || "";
-    const targetDay = getTargetDay(target);
+    const targetDay = new Date(target);
     const year = getYear(targetDay);
     const month = (getMonth(targetDay) + 1).toString().padStart(2, "0");
     const calendar = generateCalendar(year, targetDay.getMonth() + 1);
@@ -2071,7 +2040,7 @@
     let body = calendar.map((x2) => x2.date).join("\n");
     const nav = `
 [${prevPageTitle}] <- ${pageTitle} -> [${nextPageTitle}]
-[https://meganii.github.io/sb-template/monthly-calendar/?projectName=${projectName}&target=nextMonth \u6765\u6708\u306E\u30DA\u30FC\u30B8\u3092\u4F5C\u6210]
+[https://meganii.github.io/sb-template/monthly-calendar/?projectName=${projectName}&target=${nextPageTitle} \u6765\u6708\u306E\u30DA\u30FC\u30B8\u3092\u4F5C\u6210]
 `;
     body = body + nav;
     if (projectName) {

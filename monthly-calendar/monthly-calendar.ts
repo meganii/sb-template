@@ -15,7 +15,7 @@ function generateCalendar(year: number, month: number) {
     return calendar;
 }
 
-function getTargetDay(target: string) {
+function getTargetDay(target: string) { 
     const today = new Date();
     if (target == 'nextMonth') {
       return addMonths(today, 1);
@@ -26,9 +26,10 @@ function getTargetDay(target: string) {
 
 try {
     const urlSearchParams = new URLSearchParams(location.search);
-    const projectName = urlSearchParams.get("projectName");
+    const projectName = urlSearchParams.get("projectName"); // projectName取得
     const target = urlSearchParams.get("target") || "";
-    const targetDay = getTargetDay(target);
+    const targetDay = new Date(target);
+
     const year = getYear(targetDay);
     const month = (getMonth(targetDay) + 1).toString().padStart(2, "0");
     const calendar = generateCalendar(year, targetDay.getMonth()+1);
@@ -44,7 +45,7 @@ try {
     const nav =
 `
 [${prevPageTitle}] <- ${pageTitle} -> [${nextPageTitle}]
-[https://meganii.github.io/sb-template/monthly-calendar/?projectName=${projectName}&target=nextMonth 来月のページを作成]
+[https://meganii.github.io/sb-template/monthly-calendar/?projectName=${projectName}&target=${nextPageTitle} 来月のページを作成]
 `;
     body = body + nav;  
 
